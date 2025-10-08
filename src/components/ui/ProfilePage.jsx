@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-
-const API_BASE_URL = 'http://localhost:5000/api/users';
+import {BASE_API_URL} from '../../util/Url.js';
 
 function ProfilePage({ isOpen, onClose }) {
     const [profile, setProfile] = useState(null);
@@ -21,7 +20,7 @@ function ProfilePage({ isOpen, onClose }) {
         setLoading(true);
         setError(null);
         try {
-            const response = await axios.get(`${API_BASE_URL}/admin`, {});
+            const response = await axios.get(`${BASE_API_URL}/users/admin`, {});
             const fetchedProfile = response.data;
             setProfile(fetchedProfile);
         } catch (err) {

@@ -4,9 +4,7 @@ import axios from 'axios';
 import Table from '../components/ui/Table';
 import Modal from '../components/ui/Modal';
 import Button from '../components/ui/Button';
-
-const API_URL = 'http://localhost:5000/api/products';
-
+import {BASE_API_URL} from '../util/Url.js';
 
 const initialFormState = {
   productName: '',
@@ -38,7 +36,7 @@ const Products = () => {
     setIsLoading(true);
     setFetchError(null);
     try {
-      const response = await axios.get(API_URL);
+      const response = await axios.get(`${BASE_API_URL}/products`);
 
       const mappedProducts = response.data.map(product => ({
         ...product,
@@ -103,7 +101,7 @@ const Products = () => {
       data.append('category', formData.category || '');
       data.append('imageFile', formData.imageFile);
 
-      const response = await axios.post(API_URL, data);
+      const response = await axios.post(`${BASE_API_URL}/products`, data);
 
       alert(`Product "${response.data.name || formData.productName}" created successfully!`);
       setIsModalOpen(false);
